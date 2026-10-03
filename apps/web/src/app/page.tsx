@@ -40,7 +40,7 @@ export default function Home() {
       id: 'citizen',
       roleTitle: 'Resident / Citizen Portal',
       user: 'Lakshmi S. (Citizen)',
-      defaultEmail: 'citizen.lakshmi@visakhapatnam.gov.in',
+      defaultEmail: 'citizen.lakshmi@ghmc.gov.in',
       path: '/citizen',
       icon: Users,
       badge: 'Multilingual Voice',
@@ -103,7 +103,7 @@ export default function Home() {
           <div>
             <h1 className="text-base font-black tracking-tight text-indigo-950">Swachh Setu</h1>
             <p className="text-[10px] font-semibold text-indigo-600">
-              Visakhapatnam Municipal Corporation &bull; AI-Powered Sanitation Platform
+              Greater Hyderabad Municipal Corporation (GHMC) &bull; AI-Powered Sanitation Platform
             </p>
           </div>
         </div>
@@ -326,7 +326,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-indigo-100 bg-white py-4 px-6 text-center text-xs text-slate-500 font-medium">
-        Swachh Setu &copy; 2026 Greater Visakhapatnam Municipal Corporation (GVMC) &bull; Smart Sanitation Operations
+        Swachh Setu &copy; 2026 Greater Hyderabad Municipal Corporation (GHMC) &bull; Smart Sanitation Operations
       </footer>
     </div>
   );

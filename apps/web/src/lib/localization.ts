@@ -28,7 +28,7 @@ export interface TranslationDictionary {
 export const translations: Record<LanguageCode, TranslationDictionary> = {
   en: {
     appName: 'SmartWaste 360',
-    tagline: 'Visakhapatnam Municipal Operations Platform',
+    tagline: 'GHMC Hyderabad Municipal Operations Platform',
     reportIssue: 'Report Waste Problem',
     trackComplaints: 'Track Complaints',
     liveMap: 'Live Operations Map',
@@ -50,7 +50,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
   },
   hi: {
     appName: 'स्मार्टवेस्ट 360',
-    tagline: 'विशाखापटनम नगर निगम परिचालन मंच',
+    tagline: 'जीएचएमसी हैदराबाद नगर निगम परिचालन मंच',
     reportIssue: 'कचरा समस्या की रिपोर्ट करें',
     trackComplaints: 'शिकायतों को ट्रैक करें',
     liveMap: 'लाइव जीआईएस मानचित्र',
@@ -72,7 +72,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
   },
   te: {
     appName: 'స్మార్ట్‌వేస్ట్ 360',
-    tagline: 'విశాఖపట్నం మున్సిపల్ ఆపరేషన్స్ ప్లాట్‌ఫారమ్',
+    tagline: 'జీహెచ్‌ఎంసీ హైదరాబాద్ మున్సిపల్ ఆపరేషన్స్ ప్లాట్‌ఫారమ్',
     reportIssue: 'చెత్త సమస్యను నివేదించండి',
     trackComplaints: 'ఫిర్యాదులను ట్రాక్ చేయండి',
     liveMap: 'లైవ్ GIS మ్యాప్',

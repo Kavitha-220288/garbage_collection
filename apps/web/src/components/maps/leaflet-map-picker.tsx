@@ -29,11 +29,11 @@ export function LeafletMapPicker({
   const [isLoaded, setIsLoaded] = useState(false);
 
   const presetLocations = [
-    { name: 'Jagadamba Center (Main Market)', ward: 'Ward 4 (Jagadamba)', lat: 17.7121, lng: 83.3012 },
-    { name: 'Gajuwaka Market Road', ward: 'Ward 12 (Gajuwaka)', lat: 17.6892, lng: 83.2145 },
-    { name: 'MVP Colony Sector 5', ward: 'Ward 2 (MVP Colony)', lat: 17.7412, lng: 83.3321 },
-    { name: 'Beach Road (Fisheries Market)', ward: 'Ward 1 (Beach Road)', lat: 17.7188, lng: 83.3245 },
-    { name: 'NAD Junction Market', ward: 'Ward 15 (NAD)', lat: 17.7301, lng: 83.2456 },
+    { name: 'Maisammaguda (Malla Reddy Campus)', ward: 'Ward 1 (Maisammaguda)', lat: 17.5615, lng: 78.4485 },
+    { name: 'Dulapally Village Circle', ward: 'Ward 2 (Dulapally)', lat: 17.5580, lng: 78.4410 },
+    { name: 'Gundlapochampally Station Road', ward: 'Ward 3 (Gundlapochampally)', lat: 17.5680, lng: 78.4550 },
+    { name: 'Kompally Highway Junction (NH-44)', ward: 'Ward 4 (Kompally)', lat: 17.5450, lng: 78.4890 },
+    { name: 'Bahadurpally X Roads', ward: 'Ward 5 (Bahadurpally)', lat: 17.5410, lng: 78.4320 },
   ];
 
   useEffect(() => {
@@ -46,8 +46,8 @@ export function LeafletMapPicker({
 
       leafletRef.current = L;
 
-      const initialLat = latitude || 17.7121;
-      const initialLng = longitude || 83.3012;
+      const initialLat = latitude || 17.5615;
+      const initialLng = longitude || 78.4485;
 
       const map = L.map(mapContainerRef.current, {
         center: [initialLat, initialLng],
@@ -68,7 +68,7 @@ export function LeafletMapPicker({
         draggable: true,
       }).addTo(map);
 
-      marker.bindPopup(`<b>${address || 'Selected Location'}</b><br/>${wardName || 'Visakhapatnam Zone'}`).openPopup();
+      marker.bindPopup(`<b>${address || 'Selected Location'}</b><br/>${wardName || 'GHMC Maisammaguda Zone'}`).openPopup();
 
       marker.on('dragend', () => {
         const position = marker.getLatLng();
@@ -79,7 +79,7 @@ export function LeafletMapPicker({
         }, presetLocations[0]);
 
         const updatedAddress = `Near GPS (${position.lat.toFixed(4)}, ${position.lng.toFixed(4)})`;
-        const updatedWard = closestPreset ? closestPreset.ward : 'Visakhapatnam Municipal Ward';
+        const updatedWard = closestPreset ? closestPreset.ward : 'GHMC Maisammaguda Ward';
 
         marker.setPopupContent(`<b>${updatedAddress}</b><br/>${updatedWard}`);
 
@@ -102,7 +102,7 @@ export function LeafletMapPicker({
         }, presetLocations[0]);
 
         const updatedAddress = `Near GPS (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
-        const updatedWard = closestPreset ? closestPreset.ward : 'Visakhapatnam Municipal Ward';
+        const updatedWard = closestPreset ? closestPreset.ward : 'GHMC Maisammaguda Ward';
 
         marker.setPopupContent(`<b>${updatedAddress}</b><br/>${updatedWard}`).openPopup();
 
@@ -142,9 +142,41 @@ export function LeafletMapPicker({
     }
   }, [latitude, longitude, address, wardName]);
 
+  const handleLocateCurrentPosition = () => {
+    if (typeof window !== 'undefined' && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const lat = Number(pos.coords.latitude.toFixed(6));
+          const lng = Number(pos.coords.longitude.toFixed(6));
+          const currentAddress = `Current GPS Location (${lat}°N, ${lng}°E)`;
+          const currentWard = 'Local Ward Area';
+
+          if (mapInstanceRef.current && markerRef.current) {
+            markerRef.current.setLatLng([lat, lng]);
+            markerRef.current.setPopupContent(`<b>${currentAddress}</b><br/>${currentWard}`).openPopup();
+            mapInstanceRef.current.flyTo([lat, lng], 16, { animate: true });
+          }
+
+          onChangeLocation({
+            latitude: lat,
+            longitude: lng,
+            address: currentAddress,
+            wardName: currentWard,
+          });
+        },
+        (error) => {
+          console.warn('GPS Geolocation permission denied or failed:', error);
+        },
+        { enableHighAccuracy: true, timeout: 8000 }
+      );
+    }
+  };
+
   const handleRecenter = () => {
     if (mapInstanceRef.current && latitude && longitude) {
       mapInstanceRef.current.flyTo([latitude, longitude], 16, { animate: true });
+    } else {
+      handleLocateCurrentPosition();
     }
   };
 
@@ -156,9 +188,14 @@ export function LeafletMapPicker({
           <span className="text-xs font-bold text-foreground">Interactive Leaflet GIS Map Location Picker</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-            OpenStreetMap Engine
-          </span>
+          <button
+            type="button"
+            onClick={handleLocateCurrentPosition}
+            className="flex items-center gap-1.5 text-[10px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-1 rounded-md hover:bg-indigo-100 transition-colors shadow-2xs"
+          >
+            <Compass className="h-3.5 w-3.5 text-indigo-600 animate-spin" />
+            <span>Locate My Current GPS</span>
+          </button>
           <button
             type="button"
             onClick={handleRecenter}

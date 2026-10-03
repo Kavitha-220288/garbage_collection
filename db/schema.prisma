@@ -1,0 +1,121 @@
+// Prisma Schema for Swachh Setu Municipal Sanitation Platform
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum WasteCategory {
+  OVERFLOWING_BIN
+  ILLEGAL_DUMPING
+  MISSED_HOUSEHOLD_PICKUP
+  HAZARDOUS_ELECTRONIC
+  CONSTRUCTION_DEBRIS
+  GREEN_GARDEN_WASTE
+  DEAD_ANIMAL
+  COMMERCIAL_WASTE
+  DRAINAGE_LITTER
+  PLASTIC_RECYCLABLES
+  MEDICAL_WASTE
+  PUBLIC_PARK
+  OTHER_HAZARD
+}
+
+enum PriorityLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum IncidentStatus {
+  SUBMITTED
+  VERIFIED
+  ASSIGNED
+  EN_ROUTE
+  WORK_STARTED
+  EVIDENCE_UPLOADED
+  SUPERVISOR_VERIFIED
+  RESOLVED
+  REASSIGNED
+  REJECTED
+}
+
+model User {
+  id           String    @id @default(uuid())
+  fullName     String
+  email        String    @unique
+  phone        String?
+  passwordHash String
+  role         String    // CITIZEN | WORKER | SUPERVISOR | OFFICER | ADMIN
+  wardName     String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  reports      CitizenReport[]
+  assignedTasks Incident[]     @relation("AssignedWorker")
+}
+
+model Incident {
+  id                 String         @id @default(uuid())
+  incidentCode       String         @unique // e.g. INC-2026-089
+  title              String
+  category           WasteCategory
+  categoryLabel      String
+  latitude           Float
+  longitude          Float
+  address            String
+  wardName           String
+  reportsCount       Int            @default(1)
+  confidence         Float          @default(0.95)
+  priority           PriorityLevel  @default(HIGH)
+  priorityScore      Int            @default(75)
+  status             IncidentStatus @default(SUBMITTED)
+  slaTargetHours     Int            @default(4)
+  slaDueAt           DateTime
+  beforePhotoUrl     String?
+  beforePhotoHash    String?
+  afterPhotoUrl      String?
+  afterPhotoHash     String?
+  aiVerificationScore Int?
+  
+  assignedWorkerId   String?
+  assignedWorker     User?          @relation("AssignedWorker", fields: [assignedWorkerId], references: [id])
+  assignedVehicleId  String?
+  
+  ratingScore        Float?
+  ratingFeedback     String?
+  
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  reports            CitizenReport[]
+  auditLogs          AuditLog[]
+}
+
+model CitizenReport {
+  id             String    @id @default(uuid())
+  incidentId     String
+  incident       Incident  @relation(fields: [incidentId], references: [id], onDelete: Cascade)
+  citizenId      String?
+  citizen        User?     @relation(fields: [citizenId], references: [id])
+  rawText        String?
+  voiceLanguage  String?   // te | hi | en
+  photoUrl       String?
+  createdAt      DateTime  @default(now())
+}
+
+model AuditLog {
+  id           String   @id @default(uuid())
+  incidentId   String
+  incident     Incident @relation(fields: [incidentId], references: [id], onDelete: Cascade)
+  actorName    String
+  actorRole    String
+  action       String
+  details      String
+  timestamp    DateTime @default(now())
+}

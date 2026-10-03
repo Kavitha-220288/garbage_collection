@@ -100,7 +100,7 @@ export default function ReportWastePage() {
             <OriginBadge origin="REAL" size="sm" />
           </div>
           <p className="text-xs text-muted-foreground mt-1">
-            Submit waste issues directly to Visakhapatnam Municipal Command. The Incident Engine clusters duplicates automatically.
+            Submit waste issues directly to Greater Hyderabad Municipal Command. The Incident Engine clusters duplicates automatically.
           </p>
         </div>
       </div>

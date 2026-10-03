@@ -389,7 +389,7 @@ export default function WorkerDashboard() {
             <Map className="h-4 w-4 text-emerald-600" /> Active GPS Turn-by-Turn Route Navigation
           </h3>
           <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-200">
-            Route #GJW-04 &bull; Visakhapatnam Gajuwaka Zone
+            Route #HYD-04 &bull; GHMC Hyderabad Cyberabad Zone
           </span>
         </div>
         <LeafletGisMap height="h-[380px]" />

@@ -76,7 +76,7 @@ export default function PublicDashboard() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold tracking-tight text-foreground">
-              Visakhapatnam Public Waste Transparency Portal
+              Hyderabad Public Waste Transparency Portal
             </h1>
             <OriginBadge origin="REAL" size="sm" />
           </div>

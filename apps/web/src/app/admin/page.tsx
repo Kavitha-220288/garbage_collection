@@ -107,7 +107,7 @@ export default function AdminDashboard() {
             <OriginBadge origin="REAL" size="sm" />
           </div>
           <p className="text-xs text-muted-foreground mt-1">
-            Priya Sharma (Platform Administrator) &bull; Visakhapatnam Municipal Config
+            Priya Sharma (Platform Administrator) &bull; GHMC Hyderabad Municipal Config
           </p>
         </div>
       </div>

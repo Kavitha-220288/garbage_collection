@@ -91,60 +91,58 @@ interface LeafletGisMapProps {
 
 const wardBoundaries = [
   {
-    name: 'Ward 4 (Jagadamba)',
+    name: 'Ward 1 (Maisammaguda College Zone)',
     cleanlinessScore: 92,
     color: '#10b981',
     coordinates: [
-      [17.708, 83.295],
-      [17.718, 83.295],
-      [17.722, 83.308],
-      [17.712, 83.312],
-      [17.705, 83.302],
+      [17.555, 78.440],
+      [17.570, 78.442],
+      [17.572, 78.458],
+      [17.556, 78.455],
     ],
   },
   {
-    name: 'Ward 12 (Gajuwaka)',
-    cleanlinessScore: 78,
-    color: '#f59e0b',
-    coordinates: [
-      [17.682, 83.205],
-      [17.698, 83.208],
-      [17.702, 83.225],
-      [17.688, 83.228],
-      [17.678, 83.218],
-    ],
-  },
-  {
-    name: 'Ward 2 (MVP Colony)',
-    cleanlinessScore: 95,
+    name: 'Ward 2 (Dulapally Village Circle)',
+    cleanlinessScore: 88,
     color: '#059669',
     coordinates: [
-      [17.735, 83.325],
-      [17.748, 83.328],
-      [17.752, 83.342],
-      [17.738, 83.345],
+      [17.545, 78.430],
+      [17.562, 78.432],
+      [17.564, 78.445],
+      [17.547, 78.442],
     ],
   },
   {
-    name: 'Ward 1 (Beach Road)',
-    cleanlinessScore: 89,
+    name: 'Ward 3 (Gundlapochampally Station)',
+    cleanlinessScore: 85,
     color: '#10b981',
     coordinates: [
-      [17.712, 83.320],
-      [17.725, 83.324],
-      [17.730, 83.338],
-      [17.715, 83.334],
+      [17.560, 78.450],
+      [17.575, 78.452],
+      [17.578, 78.468],
+      [17.562, 78.465],
     ],
   },
   {
-    name: 'Ward 15 (NAD)',
-    cleanlinessScore: 68,
-    color: '#ef4444',
+    name: 'Ward 4 (Kompally Highway Junction)',
+    cleanlinessScore: 79,
+    color: '#f59e0b',
     coordinates: [
-      [17.722, 83.238],
-      [17.738, 83.242],
-      [17.742, 83.258],
-      [17.728, 83.255],
+      [17.535, 78.475],
+      [17.555, 78.478],
+      [17.558, 78.495],
+      [17.538, 78.492],
+    ],
+  },
+  {
+    name: 'Ward 5 (Bahadurpally X-Roads)',
+    cleanlinessScore: 83,
+    color: '#3b82f6',
+    coordinates: [
+      [17.530, 78.420],
+      [17.548, 78.422],
+      [17.550, 78.438],
+      [17.532, 78.435],
     ],
   },
 ];
@@ -156,16 +154,16 @@ const defaultVehicles: MapVehicle[] = [
     driverName: 'Ravi Kumar',
     type: 'Compactor',
     status: 'COLLECTING',
-    lat: 17.7121,
-    lng: 83.3012,
-    speedKmH: 24,
+    lat: 17.5615,
+    lng: 78.4485,
+    speedKmH: 26,
     capacityUsedPercent: 65,
-    ward: 'Ward 4 (Jagadamba)',
+    ward: 'Ward 1 (Maisammaguda)',
     routePath: [
-      [17.708, 83.298],
-      [17.7121, 83.3012],
-      [17.715, 83.305],
-      [17.718, 83.308],
+      [17.556, 78.442],
+      [17.5615, 78.4485],
+      [17.565, 78.452],
+      [17.570, 78.456],
     ],
   },
   {
@@ -174,11 +172,11 @@ const defaultVehicles: MapVehicle[] = [
     driverName: 'Srinivas M.',
     type: 'Sweeper',
     status: 'EN_ROUTE',
-    lat: 17.7412,
-    lng: 83.3321,
-    speedKmH: 18,
+    lat: 17.5580,
+    lng: 78.4410,
+    speedKmH: 20,
     capacityUsedPercent: 40,
-    ward: 'Ward 2 (MVP Colony)',
+    ward: 'Ward 2 (Dulapally)',
   },
   {
     id: 'v3',
@@ -186,11 +184,11 @@ const defaultVehicles: MapVehicle[] = [
     driverName: 'K. Prasad',
     type: 'E-Tipper',
     status: 'AVAILABLE',
-    lat: 17.6892,
-    lng: 83.2145,
+    lat: 17.5680,
+    lng: 78.4550,
     speedKmH: 0,
     capacityUsedPercent: 10,
-    ward: 'Ward 12 (Gajuwaka)',
+    ward: 'Ward 3 (Gundlapochampally)',
   },
   {
     id: 'v4',
@@ -198,11 +196,23 @@ const defaultVehicles: MapVehicle[] = [
     driverName: 'M. Naidu',
     type: 'Compactor',
     status: 'FULL',
-    lat: 17.7301,
-    lng: 83.2456,
-    speedKmH: 32,
+    lat: 17.5450,
+    lng: 78.4890,
+    speedKmH: 34,
     capacityUsedPercent: 96,
-    ward: 'Ward 15 (NAD)',
+    ward: 'Ward 4 (Kompally)',
+  },
+  {
+    id: 'v5',
+    vehicleId: 'Vehicle V-22',
+    driverName: 'A. Reddy',
+    type: 'E-Tipper',
+    status: 'COLLECTING',
+    lat: 17.5410,
+    lng: 78.4320,
+    speedKmH: 15,
+    capacityUsedPercent: 55,
+    ward: 'Ward 5 (Bahadurpally)',
   },
 ];
 
@@ -210,96 +220,119 @@ const defaultBins: MapBin[] = [
   {
     id: 'b1',
     binId: 'BIN-108',
-    locationName: 'Jagadamba Main Market',
-    ward: 'Ward 4',
-    fillLevelPercent: 88,
-    tempCelsius: 34,
-    lat: 17.7135,
-    lng: 83.3025,
+    locationName: 'Maisammaguda Malla Reddy Campus Main Gate',
+    ward: 'Ward 1',
+    fillLevelPercent: 92,
+    tempCelsius: 32,
+    lat: 17.5615,
+    lng: 78.4485,
     status: 'OVERFLOWING',
     lastSync: '2 mins ago',
   },
   {
     id: 'b2',
     binId: 'BIN-104',
-    locationName: 'MVP Sector 3 Bus Stop',
+    locationName: 'Dulapally Village Circle Market',
     ward: 'Ward 2',
-    fillLevelPercent: 42,
-    tempCelsius: 29,
-    lat: 17.7425,
-    lng: 83.334,
+    fillLevelPercent: 45,
+    tempCelsius: 28,
+    lat: 17.5580,
+    lng: 78.4410,
     status: 'NORMAL',
     lastSync: '5 mins ago',
   },
   {
     id: 'b3',
     binId: 'BIN-210',
-    locationName: 'Gajuwaka Commercial Hub',
-    ward: 'Ward 12',
-    fillLevelPercent: 74,
-    tempCelsius: 31,
-    lat: 17.691,
-    lng: 83.216,
+    locationName: 'Gundlapochampally Railway Crossing Gate',
+    ward: 'Ward 3',
+    fillLevelPercent: 78,
+    tempCelsius: 30,
+    lat: 17.5680,
+    lng: 78.4550,
     status: 'WARNING',
     lastSync: '1 min ago',
   },
   {
     id: 'b4',
     binId: 'BIN-088',
-    locationName: 'Fisheries Harbor Gate',
-    ward: 'Ward 1',
-    fillLevelPercent: 91,
-    tempCelsius: 36,
-    lat: 17.7195,
-    lng: 83.326,
+    locationName: 'Kompally NH-44 Highway Commercial Hub',
+    ward: 'Ward 4',
+    fillLevelPercent: 94,
+    tempCelsius: 35,
+    lat: 17.5450,
+    lng: 78.4890,
     status: 'OVERFLOWING',
     lastSync: 'Just now',
+  },
+  {
+    id: 'b5',
+    binId: 'BIN-412',
+    locationName: 'Bahadurpally X-Roads Bus Shelter',
+    ward: 'Ward 5',
+    fillLevelPercent: 81,
+    tempCelsius: 31,
+    lat: 17.5410,
+    lng: 78.4320,
+    status: 'WARNING',
+    lastSync: '3 mins ago',
   },
 ];
 
 const defaultIncidents: MapIncident[] = [
   {
     id: 'INC-2026-089',
-    title: 'Illegal Commercial Dumping behind Supermarket',
+    title: 'Illegal Commercial Dumping behind Maisammaguda Campus',
     category: 'Illegal Dumping',
     priority: 'CRITICAL',
-    lat: 17.7145,
-    lng: 83.304,
-    ward: 'Ward 4 (Jagadamba)',
+    lat: 17.5622,
+    lng: 78.4495,
+    ward: 'Ward 1 (Maisammaguda)',
     status: 'VERIFIED',
     reportedAt: '15 mins ago',
   },
   {
     id: 'INC-2026-092',
-    title: 'Overflowing Bin near School Entrance',
+    title: 'Overflowing Bin near Dulapally Bus Stop',
     category: 'Overflowing Bin',
     priority: 'HIGH',
-    lat: 17.7315,
-    lng: 83.248,
-    ward: 'Ward 15 (NAD)',
+    lat: 17.5575,
+    lng: 78.4402,
+    ward: 'Ward 2 (Dulapally)',
     status: 'ASSIGNED',
     reportedAt: '40 mins ago',
+  },
+  {
+    id: 'INC-2026-095',
+    title: 'Drainage Debris Accumulation near Kompally Highway',
+    category: 'Drainage / Litter',
+    priority: 'HIGH',
+    lat: 17.5445,
+    lng: 78.4880,
+    ward: 'Ward 4 (Kompally)',
+    status: 'EN_ROUTE',
+    reportedAt: '25 mins ago',
   },
 ];
 
 const defaultFacilities: MapFacility[] = [
   {
     id: 'f1',
-    name: 'KAPULUADA Material Recovery Facility (MRF #1)',
+    name: 'Jawaharnagar Waste Management & MRF Facility (#1)',
     type: 'MRF',
-    capacityTonsDay: 250,
-    lat: 17.755,
-    lng: 83.345,
-    ward: 'Kapuluada Industrial Zone',
+    capacityTonsDay: 450,
+    lat: 17.5250,
+    lng: 78.5680,
+    ward: 'GHMC Jawaharnagar Zone',
   },
   {
     id: 'f2',
-    name: 'Gajuwaka Waste Transfer Station',
+    name: 'Maisammaguda Waste Transfer Station',
     type: 'Transfer Station',
-    capacityTonsDay: 120,
-    lat: 17.685,
-    lng: 83.21,
-    ward: 'Ward 12',
+    capacityTonsDay: 200,
+    lat: 17.5640,
+    lng: 78.4460,
+    ward: 'Ward 1 (Maisammaguda)',
   },
 ];
 
@@ -330,7 +363,7 @@ export function LeafletGisMap({
   const [showWards, setShowWards] = useState(true);
   const [showRoutes, setShowRoutes] = useState(true);
 
-  const [tileStyle, setTileStyle] = useState<'osm' | 'dark' | 'light'>('dark');
+  const [tileStyle, setTileStyle] = useState<'osm' | 'dark' | 'light'>('osm');
   const [isSimulating, setIsSimulating] = useState(false);
   const simulationRef = useRef<NodeJS.Timeout | null>(null);
   const [liveVehicles, setLiveVehicles] = useState<MapVehicle[]>(vehicles);
@@ -350,8 +383,8 @@ export function LeafletGisMap({
       leafletRef.current = L;
 
       const map = L.map(mapContainerRef.current, {
-        center: [17.7121, 83.3012],
-        zoom: 13,
+        center: [17.5615, 78.4485],
+        zoom: 14,
         zoomControl: false,
       });
 
@@ -360,18 +393,18 @@ export function LeafletGisMap({
         attribution: '&copy; OpenStreetMap contributors',
       });
 
-      const dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      const dark = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
         maxZoom: 19,
-        attribution: '&copy; CARTO Dark Matter',
+        attribution: '&copy; Esri Topo Map',
       });
 
-      const light = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      const light = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         maxZoom: 19,
-        attribution: '&copy; CARTO Voyager',
+        attribution: '&copy; Esri World Imagery',
       });
 
       tileLayersRef.current = { osm, dark, light };
-      dark.addTo(map);
+      osm.addTo(map);
 
       L.control.zoom({ position: 'topright' }).addTo(map);
 

@@ -69,7 +69,7 @@ export default function CitizenDashboard() {
             <OriginBadge origin="REAL" size="sm" />
           </div>
           <p className="text-xs text-muted-foreground mt-1">
-            Lakshmi K. &bull; MVP Colony, Ward 2 &bull; Visakhapatnam
+            Lakshmi K. &bull; Maisammaguda, Ward 1 &bull; Hyderabad
           </p>
         </div>
 

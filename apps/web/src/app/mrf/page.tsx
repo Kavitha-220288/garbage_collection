@@ -136,7 +136,7 @@ export default function MrfDashboard() {
             <OriginBadge origin="REAL" size="sm" />
           </div>
           <p className="text-xs text-muted-foreground mt-1">
-            Visakhapatnam Plant #1 (Gajuwaka Industrial Estate) &bull; Suresh N. (MRF Manager)
+            Hyderabad MRF Plant #1 (Patancheru Industrial Estate) &bull; Suresh N. (MRF Manager)
           </p>
         </div>
 

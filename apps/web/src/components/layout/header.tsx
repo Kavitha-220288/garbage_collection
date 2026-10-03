@@ -183,7 +183,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
                   <p className="text-xs font-bold text-emerald-950 dark:text-emerald-100">Dr. K. V. Rao</p>
                   <p className="text-[10px] text-slate-500 dark:text-slate-400">Chief Municipal Officer</p>
                   <p className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 mt-0.5 flex items-center gap-1">
-                    <CheckCircle2 className="h-3 w-3" /> Visakhapatnam Municipal Corp
+                    <CheckCircle2 className="h-3 w-3" /> Greater Hyderabad Municipal Corp (GHMC)
                   </p>
                 </div>
                 <div className="pt-2 space-y-1">

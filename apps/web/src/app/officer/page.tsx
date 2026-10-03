@@ -41,7 +41,7 @@ export default function OfficerCommandCentre() {
 
   // Drilldown level state: City -> Zone -> Ward -> Area -> Location -> Incident
   const [drillLevel, setDrillLevel] = useState<'CITY' | 'ZONE' | 'WARD' | 'LOCATION'>('CITY');
-  const [selectedWard, setSelectedWard] = useState<string>('All 20 Wards (Visakhapatnam)');
+  const [selectedWard, setSelectedWard] = useState<string>('All GHMC Wards (Hyderabad)');
 
   // WIE Intelligence outputs
   const priorityResult = calculateExplainablePriority('OVERFLOWING_BIN', 3, false, 1.5);
@@ -60,7 +60,7 @@ export default function OfficerCommandCentre() {
             <OriginBadge origin="REAL" size="sm" />
           </div>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Dr. K. V. Rao (Chief Officer) &bull; Visakhapatnam Municipal Corporation (5 Zones, 20 Wards)
+            Dr. K. V. Rao (Chief Officer) &bull; Greater Hyderabad Municipal Corporation (6 Zones, 30 Circles)
           </p>
         </div>
 
@@ -71,7 +71,7 @@ export default function OfficerCommandCentre() {
             type="button"
             onClick={() => {
               setDrillLevel('CITY');
-              setSelectedWard('All 20 Wards (Visakhapatnam)');
+              setSelectedWard('All GHMC Wards (Hyderabad)');
             }}
             className={`px-2 py-0.5 rounded-md transition-colors ${
               drillLevel === 'CITY' ? 'bg-emerald-600 text-white' : 'hover:bg-emerald-100 text-slate-700'
