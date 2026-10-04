@@ -72,17 +72,16 @@ export default function Home() {
   ];
 
   const [selectedPortal, setSelectedPortal] = useState<PortalOption>(portals[0]);
-  const [email, setEmail] = useState(portals[0].defaultEmail);
-  const [password, setPassword] = useState('••••••••••••');
-  const [fullName, setFullName] = useState(portals[0].user);
-  const [phone, setPhone] = useState('+91 98765 43210');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [phone, setPhone] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handlePortalSelect = (portal: PortalOption) => {
     setSelectedPortal(portal);
-    setEmail(portal.defaultEmail);
-    setFullName(portal.user);
   };
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -254,6 +253,7 @@ export default function Home() {
                         required
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
+                        placeholder="Enter your full name"
                         className="w-full rounded-xl border border-indigo-200 bg-indigo-50/20 px-3.5 py-2 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none font-medium"
                       />
                     </div>
@@ -267,6 +267,7 @@ export default function Home() {
                         required
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
+                        placeholder="Enter your mobile number"
                         className="w-full rounded-xl border border-indigo-200 bg-indigo-50/20 px-3.5 py-2 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none font-medium"
                       />
                     </div>
@@ -282,6 +283,7 @@ export default function Home() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email address"
                     className="w-full rounded-xl border border-indigo-200 bg-indigo-50/20 px-3.5 py-2 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none font-medium"
                   />
                 </div>
@@ -295,9 +297,11 @@ export default function Home() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password"
                     className="w-full rounded-xl border border-indigo-200 bg-indigo-50/20 px-3.5 py-2 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none font-medium"
                   />
                 </div>
+
 
                 <button
                   type="submit"

@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { dbStore } from '../../../../../../../api/src/services/db-store';
 import { SubmitFeedbackInputSchema } from '@smartwaste360/contracts';
+import { connectToDatabase } from '@/lib/mongodb';
+import { FeedbackModel } from '@/lib/models';
 
 export async function POST(
   request: Request,
@@ -12,6 +14,14 @@ export async function POST(
     const validated = SubmitFeedbackInputSchema.parse(body);
 
     const feedback = dbStore.submitFeedback(id, validated.rating, validated.comment);
+
+    // Save to MongoDB if connected
+    try {
+      await connectToDatabase();
+      await FeedbackModel.create(feedback);
+    } catch (dbErr: any) {
+      console.warn('⚠️ MongoDB feedback insert skipped:', dbErr?.message || dbErr);
+    }
 
     return NextResponse.json({
       success: true,
@@ -27,3 +37,4 @@ export async function POST(
     );
   }
 }
+

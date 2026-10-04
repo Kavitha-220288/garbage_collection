@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { LanguageSelector } from '@/components/common/language-selector';
@@ -39,6 +39,22 @@ export function Header({ onToggleSidebar }: HeaderProps) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<{ name: string; role: string; email: string } | null>(null);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('swachh_user');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed?.name) {
+          setCurrentUser(parsed);
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, []);
+
 
   const roleOptions = [
     { role: 'Citizen Portal', path: '/citizen', icon: Users, badge: 'Lakshmi (Citizen)' },
@@ -170,8 +186,8 @@ export function Header({ onToggleSidebar }: HeaderProps) {
             className="flex items-center gap-2 rounded-full border-2 border-indigo-400 p-1 hover:bg-indigo-50 transition-colors shadow-xs"
             aria-label="User Profile"
           >
-            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">
-              KR
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white uppercase">
+              {currentUser?.name ? currentUser.name.split(' ').map(n => n[0]).join('').slice(0, 2) : 'US'}
             </div>
           </button>
 
@@ -180,10 +196,14 @@ export function Header({ onToggleSidebar }: HeaderProps) {
               <div className="fixed inset-0 z-40" onClick={() => setIsProfileOpen(false)} />
               <div className="absolute right-0 mt-2 z-50 w-60 rounded-2xl border border-emerald-200 dark:border-emerald-800 bg-white dark:bg-slate-900 p-2 shadow-2xl animate-in fade-in zoom-in-95">
                 <div className="border-b border-emerald-100 dark:border-emerald-900 pb-2 px-2">
-                  <p className="text-xs font-bold text-emerald-950 dark:text-emerald-100">Dr. K. V. Rao</p>
-                  <p className="text-[10px] text-slate-500 dark:text-slate-400">Chief Municipal Officer</p>
-                  <p className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 mt-0.5 flex items-center gap-1">
-                    <CheckCircle2 className="h-3 w-3" /> Greater Hyderabad Municipal Corp (GHMC)
+                  <p className="text-xs font-bold text-emerald-950 dark:text-emerald-100">
+                    {currentUser?.name || 'Authorized User'}
+                  </p>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400">
+                    {currentUser?.role ? `${currentUser.role} Account` : 'Municipal Platform User'}
+                  </p>
+                  <p className="text-[10px] text-slate-400 truncate mt-0.5">
+                    {currentUser?.email || ''}
                   </p>
                 </div>
                 <div className="pt-2 space-y-1">
@@ -199,6 +219,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
                   </button>
                   <button
                     onClick={() => {
+                      localStorage.removeItem('swachh_user');
                       router.push('/login');
                       setIsProfileOpen(false);
                     }}
@@ -212,6 +233,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
             </>
           )}
         </div>
+
       </div>
 
       <NotificationsDrawer isOpen={isNotifOpen} onClose={() => setIsNotifOpen(false)} />

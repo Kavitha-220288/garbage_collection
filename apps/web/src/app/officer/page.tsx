@@ -38,6 +38,17 @@ import {
 
 export default function OfficerCommandCentre() {
   const [activeTab, setActiveTab] = useState('gis');
+  const [officerName, setOfficerName] = useState<string>('Municipal Officer');
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('swachh_user');
+      if (stored) {
+        const u = JSON.parse(stored);
+        if (u?.name) setOfficerName(u.name);
+      }
+    } catch (e) {}
+  }, []);
 
   // Drilldown level state: City -> Zone -> Ward -> Area -> Location -> Incident
   const [drillLevel, setDrillLevel] = useState<'CITY' | 'ZONE' | 'WARD' | 'LOCATION'>('CITY');
@@ -60,9 +71,10 @@ export default function OfficerCommandCentre() {
             <OriginBadge origin="REAL" size="sm" />
           </div>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Dr. K. V. Rao (Chief Officer) &bull; Greater Hyderabad Municipal Corporation (6 Zones, 30 Circles)
+            {officerName} &bull; Greater Hyderabad Municipal Corporation (6 Zones, 30 Circles)
           </p>
         </div>
+
 
         {/* Drill-down Breadcrumb Navigator */}
         <div className="flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/40 p-1.5 rounded-xl border border-emerald-200 text-xs font-bold text-emerald-900 dark:text-emerald-100">
